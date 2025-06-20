@@ -26,7 +26,7 @@ devnet:
 	starknet-devnet --accounts=2 --seed=0 --initial-balance=100000000000000000000000
 
 accounts-file:
-	curl -s http://localhost:5050/predeployed_accounts | jq '{"alpha-sepolia": {"devnet0": {address: .[0].address, private_key: .[0].private_key, public_key: .[0].public_key, class_hash: "0xe2eb8f5672af4e6a4e8a8f1b44989685e668489b0a25437733756c5a34a1d6", deployed: true, legacy: false, salt: "0x14", type: "open_zeppelin"}}}' > ./contracts/accounts.json
+	curl -s http://localhost:5001/predeployed_accounts | jq '{"alpha-sepolia": {"devnet0": {address: .[0].address, private_key: .[0].private_key, public_key: .[0].public_key, class_hash: "0xe2eb8f5672af4e6a4e8a8f1b44989685e668489b0a25437733756c5a34a1d6", deployed: true, legacy: false, salt: "0x14", type: "open_zeppelin"}}}' > ./contracts/accounts.json
 
 build-circuit:
 	cd circuit && nargo build
@@ -51,7 +51,7 @@ declare-verifier:
 
 deploy-verifier:
 	# TODO: use class hash from the result of the `make declare-verifier` step
-	cd contracts && sncast deploy --salt 0x00 --class-hash 0x061dac032f228abef9c6626f995015233097ae253a7f72d68552db02f2971b8f
+	cd contracts && sncast deploy --salt 0x00 --class-hash 0x004d13e14caa3b225b07595e7edcade77ce849e30ee7908bf4b2e4446d652ebf
 
 artifacts:
 	cp ./circuit/target/circuit.json ./app/src/assets/circuit.json
